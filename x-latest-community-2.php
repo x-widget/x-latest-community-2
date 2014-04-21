@@ -13,20 +13,20 @@ if($file_headers[0] == 'HTTP/1.1 404 Not Found') {
     $icon_url = null;
 }
 
-if( $widget_config['forum1'] ) $bo_table = $widget_config['forum1'];
-else $bo_table = bo_table(1);
+if( $widget_config['forum1'] ) $_bo_table = $widget_config['forum1'];
+else $_bo_table = bo_table(1);
 
 if( $widget_config['no'] ) $limit = $widget_config['no'];
 else $limit = 5;
 
 $list = g::posts( array(
-			"bo_table" 	=>	$bo_table,
+			"bo_table" 	=>	$_bo_table,
 			"limit"		=>	$limit,
 			"select"	=>	"idx,domain,bo_table,wr_id,wr_parent,wr_is_comment,wr_comment,ca_name,wr_datetime,wr_hit,wr_good,wr_nogood,wr_name,mb_id,wr_subject,wr_content"
 				)
 		);	
 		
-$title_query = "SELECT bo_subject FROM ".$g5['board_table']." WHERE bo_table = '".$bo_table."'";
+$title_query = "SELECT bo_subject FROM ".$g5['board_table']." WHERE bo_table = '".$_bo_table."'";
 $title = cut_str(db::result( $title_query ),10,"...");
 ?>
 
@@ -35,9 +35,9 @@ $title = cut_str(db::result( $title_query ),10,"...");
 	<div class='title'>
 		<div  class='top-title'>
 		<? if ( $icon_url ) echo "<img class='x-latest-withcenter-icon' src='".$icon_url."'/>"; ?>
-		<a href="<?=G5_BBS_URL?>/board.php?bo_table=<?=$bo_table?>"><?=$title?></a>
+		<a href="<?=G5_BBS_URL?>/board.php?bo_table=<?=$_bo_table?>"><?=$title?></a>
 		</div>
-		<a class='more_btn' href="<?php echo G5_BBS_URL ?>/board.php?bo_table=<?=$bo_table?>"><img src='<?=x::url()?>/widget/<?=$widget_config['name']?>/img/more_btn.gif' /></a>
+		<a class='more_btn' href="<?php echo G5_BBS_URL ?>/board.php?bo_table=<?=$_bo_table?>"><img src='<?=x::url()?>/widget/<?=$widget_config['name']?>/img/more_btn.gif' /></a>
 		<div style='clear: both;'></div>
 	</div>
     <ul>
